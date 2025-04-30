@@ -71,9 +71,6 @@ herbal_sub = Subscription.create!(
   customer: logan
 )
 
-green_sub.update!(customer: laurel)
-white_sub.update!(customer: logan)
-
 black_teas.each { |tea| TeaSubscription.create!(subscription: black_sub, tea: tea) }
 green_teas.each { |tea| TeaSubscription.create!(subscription: green_sub, tea: tea) }
 white_teas.each { |tea| TeaSubscription.create!(subscription: white_sub, tea: tea) }
