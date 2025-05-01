@@ -1,24 +1,117 @@
-# README
+# The Jasmine Dragon - BE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Overview
 
-Things you may want to cover:
+This is the backend API for The Jasmine Dragon, a tea subscription service where staff can view, and cancel various tea subscriptions. The API provides JSON:API-compliant endpoints and is designed to be consumed by a React frontend.Check out my frontend repo [here!](https://github.com/ldsauer/vite-react-starter)
 
-* Ruby version
+### Notable Technologies
 
-* System dependencies
+- Ruby
+- Rails
+- Postgres (PostgreSQL)
+- RSpec
+- simplecov
 
-* Configuration
+## Running Locally
 
-* Database creation
+### Setup Steps
 
-* Database initialization
+1. Clone the repo to your machine: `git clone git@github.com:ldsauer/rails-api-starter.git`
+2. Open the directory: `cd rails-api-starter`
+3. Install required gems: `bundle install`
+4. Setup the database: `rails db:{drop,create,migrate,seed}`
+5. Start the server: `rails s`
 
-* How to run the test suite
+### Running Test Suite
 
-* Services (job queues, cache servers, search engines, etc.)
+- To run the entire suite: `bundle exec rake`
+- To run only the model tests: `bundle exec rspec spec/models`
+- To run only the request tests: `bundle exec rspec spec/requests`
 
-* Deployment instructions
+## Database Design
 
-* ...
+[![DBDiagram Schema](assets/db_diagram.jpg "Schema")](db/schema.rb)
+
+## API Endpoints
+
+`GET all subscriptions`
+```
+{
+  "data": [
+    {
+      "id": "1",
+      "type": "subscription",
+      "attributes": {
+        "title": "Green Tea Subscription",
+        "price": "10.99",
+        "status": "active",
+        "frequency": "monthly"
+      },
+      "relationships": {
+        "customer": {
+          "data": { "id": "1", "type": "customer" }
+        },
+        "teas": {
+          "data": [
+            { "id": "5", "type": "tea" },
+            { "id": "6", "type": "tea" }
+          ]
+        }
+      }
+    }
+  ]
+}
+```
+`GET subscription by id`
+
+```
+{
+  "data": {
+    "id": "1",
+    "type": "subscription",
+    "attributes": {
+      "title": "Green Tea Subscription",
+      "price": "10.99",
+      "status": "active",
+      "frequency": "monthly"
+    },
+    "relationships": {
+      "customer": {
+        "data": { "id": "1", "type": "customer" }
+      },
+      "teas": {
+        "data": [
+          { "id": "5", "type": "tea" },
+          { "id": "6", "type": "tea" }
+        ]
+      }
+    }
+  }
+}
+```
+
+`PATCH cancel subscription`
+
+```
+{
+  "data": {
+    "id": "1",
+    "type": "subscription",
+    "attributes": {
+      "title": "Green Tea Subscription",
+      "price": "10.99",
+      "status": "cancelled",
+      "frequency": "monthly"
+    }
+  }
+}
+```
+
+
+## Contributors
+
+### Logan Sauer
+
+- [LinkedIn](https://www.linkedin.com/in/ldsauer/)
+- [GitHub](https://github.com/ldsauer)
+
